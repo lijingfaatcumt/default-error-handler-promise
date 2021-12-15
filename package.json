@@ -3,15 +3,8 @@
   "version": "1.0.0",
   "description": "a promise wraper with default error handler",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [
-    "promise",
-    "with",
-    "default",
-    "error",
-    "handler",
+    "promise with default error handler",
     "axios"
   ],
   "author": "lijingfaatcumt@163.com",
