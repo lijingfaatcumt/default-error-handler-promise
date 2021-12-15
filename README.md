@@ -4,6 +4,8 @@ so i publish the package to solve axios error with balanceing handling unified e
 
 The usage is as follows, take axios interceptors for example
 
+```javascript
+
 axios.interceptors.response.use(
   (response) => {
     const {
@@ -21,12 +23,22 @@ axios.interceptors.response.use(
   }
 )
 
+```
+
 when you request, if you will not process the error specially, you should code as follow
+
+```javascript
 
 axios('xxxxx').then(() => {})
 
+```
+
 if you want to  process the error specially, you should code as follow
+
+```javascript
 
 axios('xxxx').then(() => {}).catch(error => {
   // process the error specially
 })
+
+```
