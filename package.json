@@ -7,6 +7,10 @@
     "promise with default error handler",
     "axios"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lijingfaatcumt/default-error-handler-promise"
+  },
   "author": "lijingfaatcumt@163.com",
   "license": "ISC"
 }
