@@ -14,12 +14,16 @@ axios.interceptors.response.use(
     } = response
     if (code !== 200) {
       // if you do not process the error, the error will procesed as print
-      return new DefaultErrorHandlerPromise(Promise.reject(response, () => console.log('错误将会被统一输出')))
+      return new DefaultErrorHandlerPromise(
+        Promise.reject(response, () => console.log('错误将会被统一输出'))
+      )
     }
     return data
   },
   (err) => {
-    return new DefaultErrorHandlerPromise(Promise.reject(response, () => console.log('错误将会被统一输出')))
+    return new DefaultErrorHandlerPromise(
+      Promise.reject(response, () => console.log('错误将会被统一输出'))
+    )
   }
 )
 
@@ -38,6 +42,41 @@ if you want to  process the error specially, you should code as follow
 ```javascript
 
 axios('xxxx').then(() => {}).catch(error => {
+  // process the error specially
+})
+
+```
+
+about Promise.all and Promise.race, you can use DefaultErrorHandlerPromise.all and DefaultErrorHandlerPromise.race as follows
+
+```javascript
+
+DefaultErrorHandlerPromise.all(
+  [promise1, promise2], 
+  defaultErrorHandler /*defaultErrorHandler*/ ).then(() => {}
+)
+
+DefaultErrorHandlerPromise.race(
+  [promise1, promise2], 
+  defaultErrorHandler /*defaultErrorHandler*/ ).then(() => {}
+)
+
+```
+
+if you want to process erros specially, you can do as follows
+
+```javascript
+DefaultErrorHandlerPromise.all(
+  [promise1, promise2], 
+  defaultErrorHandler /*defaultErrorHandler*/ 
+).then(() => {}).catch(error => {
+  // process the error specially
+})
+
+DefaultErrorHandlerPromise.all(
+  [promise1, promise2], 
+  defaultErrorHandler /*defaultErrorHandler*/ 
+).then(() => {}).catch(error => {
   // process the error specially
 })
 
