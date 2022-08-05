@@ -3,7 +3,7 @@ const HandleType = {
   then: 1,
   catch: 2
 }
-export default class DefaultErrorHandlerPromise{
+class DefaultErrorHandlerPromise{
   constructor(promise, defaultErrorHandler) {
     this.defaultErrorHandler = defaultErrorHandler
     this.origin = promise
@@ -18,7 +18,8 @@ export default class DefaultErrorHandlerPromise{
   then(sucessHandler, errorHandler) {
     if (errorHandler != null) {
       this.handleType |= HandleType.catch
-    } else {
+    } 
+    if(sucessHandler != null) {
       this.handleType |= HandleType.then
     }
     const promise = this.origin.then(sucessHandler, errorHandler)
@@ -32,22 +33,10 @@ export default class DefaultErrorHandlerPromise{
   }
 
   static all(promises, defaultErrorHandler) {
-    const transformed = getOriginPromises(promises)
-    return new DefaultErrorHandlerPromise(Promise.all(transformed), defaultErrorHandler)
+    return new DefaultErrorHandlerPromise(Promise.all(promises), defaultErrorHandler)
   }
 
-  static race(promises) {
-    const transformed = getOriginPromises(promises)
-    return new DefaultErrorHandlerPromise(Promise.race(transformed), defaultErrorHandler)
+  static race(promises, defaultErrorHandler) {
+    return new DefaultErrorHandlerPromise(Promise.race(promises), defaultErrorHandler)
   }
-}
-
-function getOriginPromises(promises) {
-  return promises.map((promise) => {
-    if (promise instanceof DefaultErrorHandlerPromise) {
-      promise.defaultErrorHandler = null
-      return promise.origin
-    }
-    return promise
-  })
 }
